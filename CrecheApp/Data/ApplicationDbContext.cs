@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using CrecheApp.Models;
 
 namespace CrecheApp.Data
 {
@@ -9,5 +10,7 @@ namespace CrecheApp.Data
             : base(options)
         {
         }
+        public DbSet<CrecheApp.Models.ForumReplyModel>? ForumReplyModel { get; set; }
+        public DbSet<CrecheApp.Models.ForumModel>? ForumModel { get; set; }
     }
 }

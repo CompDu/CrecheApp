@@ -18,14 +18,18 @@ body {
 }
 
 .forum-container{
-    display : grid;
-    grid-template-columns:500px;
-    grid-template-rows:1000px;
-    border:dashed;
+    display : flex;
+    flex-direction:column;
+    border:inset;
+    background-color:aqua;
+    height:900px;
 }
-
+.text-item{
+    width:600px;
+    height:150px;
+}
 .forum-item {
-    border: groove;
-    grid-template-columns: 200px;
-    grid-template-rows: 200px;
+    border:double;
+    background-color:crimson;
+    height:auto;
 }

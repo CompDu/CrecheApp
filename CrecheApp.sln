@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLibrary", "DataAccessLibrary\DataAccessLibrary.csproj", "{B8D18730-8260-4690-A099-2E9FAB12BDC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLibrary", "DataLibrary\DataLibrary.csproj", "{A12BD840-BB76-4DAF-BFB3-DB49D558656D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +22,10 @@ Global
 		{B170D36B-F9DF-45C2-ADB4-0549159AC712}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B170D36B-F9DF-45C2-ADB4-0549159AC712}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B170D36B-F9DF-45C2-ADB4-0549159AC712}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8D18730-8260-4690-A099-2E9FAB12BDC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8D18730-8260-4690-A099-2E9FAB12BDC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8D18730-8260-4690-A099-2E9FAB12BDC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8D18730-8260-4690-A099-2E9FAB12BDC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A12BD840-BB76-4DAF-BFB3-DB49D558656D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A12BD840-BB76-4DAF-BFB3-DB49D558656D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A12BD840-BB76-4DAF-BFB3-DB49D558656D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A12BD840-BB76-4DAF-BFB3-DB49D558656D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
