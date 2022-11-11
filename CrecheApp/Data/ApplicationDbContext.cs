@@ -12,5 +12,7 @@ namespace CrecheApp.Data
         }
         public DbSet<CrecheApp.Models.ForumReplyModel>? ForumReplyModel { get; set; }
         public DbSet<CrecheApp.Models.ForumModel>? ForumModel { get; set; }
+        public DbSet<CrecheApp.Models.ChildModel> ChildModel { get; set; }
+        public DbSet<CrecheApp.Models.ParentModel> ParentModel { get; set; }
     }
 }

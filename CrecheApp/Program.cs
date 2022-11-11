@@ -1,5 +1,6 @@
 using CrecheApp.Data;
 using DataLibrary.BusinessLogic;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IDataAccess, SqlDataAccess>();
-builder.Services.AddTransient<IForumAccess,ForumAccess>();
+builder.Services.AddTransient<ForumAccess>();
+builder.Services.AddTransient<ParentAccess>();
+builder.Services.AddTransient<ChildAccess>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,6 +46,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();

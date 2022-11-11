@@ -8,7 +8,7 @@ namespace DataLibrary
 {
     public class ForumModel
     {
-        public string CommentId { get; set; }
+        public int CommentId { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Comment { get; set; }
         public string UserId { get; set; }

@@ -14,8 +14,7 @@ namespace DataLibrary.BusinessLogic
     {
         private readonly IConfiguration configuration;
 
-        
-
+       
         public SqlDataAccess(IConfiguration config)
         {
             configuration = config;

@@ -1,0 +1,58 @@
+﻿@model CrecheApp.Models.ParentModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h4>Check your Details</h4>
+<hr>
+<div>
+<table class="table">
+    
+            <input type = "hidden" value=model.Id ></input>
+            <input type = "hidden" value=model.UserId></input>
+            <tr>
+                <th>
+                @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <td>@Html.DisplayFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <th>        
+                @Html.DisplayNameFor(model => model.Surname)
+                </th>
+                <td>  @Html.DisplayFor(model => model.Surname)</td>
+            </tr>
+            <tr>
+                <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <td> @Html.DisplayFor(model => model.PhoneNumber)</td>
+            </tr>
+            <tr>
+                <th>
+                @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <td> @Html.DisplayFor(model => model.Address)</td>
+            </tr>
+            <tr>
+                <th>
+                @Html.DisplayNameFor(model => model.IDNumber)
+                </th>
+                <td> @Html.DisplayFor(model => model.IDNumber)</td>
+            </tr>
+            <tr>
+            <td><a asp-action="EditParent" asp-route-id="@Model.Id">Edit Parent</a></td>
+            </tr>
+
+            <tr> 
+               <td> <a asp-controller="ChildRegistration" asp-action="CreateChild" asp-route-id="@Model.Id">Add Child</a></td>
+            
+            </tr>
+             <tr>
+
+             <td> <a asp-controller="ChildRegistration" asp-action="ChildDetails" asp-route-id="@Model.Id">View Children</a></td>
+
+             </tr>
+    </table>
+</div>
