@@ -9,9 +9,9 @@
 <p>
     <a asp-action="CreateComment">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-striped">
     <thead>
-        <tr>
+        <tr class="card-header">
             <th>
                 @Html.DisplayNameFor(model => model.CreatedDate)
             </th>
@@ -28,7 +28,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
+                @Html.DisplayFor(modelItem => item.CreatedDate.Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Comment)

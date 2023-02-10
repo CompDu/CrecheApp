@@ -77,10 +77,12 @@
     <Compile Include="BusinessLogic\IForumAccess.cs" />
     <Compile Include="BusinessLogic\IModelDataAccess.cs" />
     <Compile Include="BusinessLogic\ParentAccess.cs" />
+    <Compile Include="BusinessLogic\PaymentAccess.cs" />
     <Compile Include="BusinessLogic\SqlDataAccess.cs" />
     <Compile Include="Models\ChildModel.cs" />
     <Compile Include="Models\ForumModel.cs" />
     <Compile Include="Models\ParentModel.cs" />
+    <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

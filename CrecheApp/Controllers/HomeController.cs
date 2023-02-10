@@ -8,6 +8,7 @@ using Dapper;
 
 namespace CrecheApp.Controllers
 {
+    [Route("{controller=Home}/{action=Index}/{Id?}")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

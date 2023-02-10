@@ -3,6 +3,7 @@ using DataLibrary.BusinessLogic;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ builder.Services.AddTransient<IDataAccess, SqlDataAccess>();
 builder.Services.AddTransient<ForumAccess>();
 builder.Services.AddTransient<ParentAccess>();
 builder.Services.AddTransient<ChildAccess>();
+builder.Services.AddTransient<PaymentAccess>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,10 +44,12 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllers();
+//app.MapControllerRoute(
+ //   name: "default",
+ //   pattern: "{controller=Home}/{action=Index}/{id?}");
+//adding {contoller=Home}/{action=Index}/{id?}/{ParentId?}
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 

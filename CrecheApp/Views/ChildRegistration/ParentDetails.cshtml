@@ -7,7 +7,7 @@
 <h4>Check your Details</h4>
 <hr>
 <div>
-<table class="table">
+<table class="table table-bordered table-info">
     
             <input type = "hidden" value=model.Id ></input>
             <input type = "hidden" value=model.UserId></input>
@@ -44,15 +44,21 @@
             <tr>
             <td><a asp-action="EditParent" asp-route-id="@Model.Id">Edit Parent</a></td>
             </tr>
+        <tr>
 
-            <tr> 
-               <td> <a asp-controller="ChildRegistration" asp-action="CreateChild" asp-route-id="@Model.Id">Add Child</a></td>
-            
-            </tr>
+            <td> <a asp-controller="ChildRegistration" asp-action="CreateChild" asp-route-id="@Model.Id">Add Child</a></td>
+
+        </tr>
              <tr>
 
              <td> <a asp-controller="ChildRegistration" asp-action="ChildDetails" asp-route-id="@Model.Id">View Children</a></td>
 
              </tr>
+
+        <tr>
+
+            <td> <a asp-controller="ChildRegistration" asp-action="PaymentDetails" asp-route-id="@Model.Id">View Payments</a></td>
+
+        </tr>
     </table>
 </div>

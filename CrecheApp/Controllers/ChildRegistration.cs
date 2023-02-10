@@ -3,29 +3,51 @@ using DataLibrary.BusinessLogic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DataLibrary.Models;
-using ParentModel = CrecheApp.Models.ParentModel;
+using ParentModel = DataLibrary.Models.ParentModel;
 using ChildModel = DataLibrary.Models.ChildModel;
+using PaymentModel = DataLibrary.Models.PaymentModel;
+
 
 namespace CrecheApp.Controllers
 {
     [Authorize]
+    [Route("{controller=Home}/{action=Index}/{Id?}")]
     public class ChildRegistration : Controller
     {
-        
-        private ParentAccess parentDb;
-        private ChildAccess childDb;    
 
-        public ChildRegistration(ParentAccess _parentDb, ChildAccess _childDb)
+        private ParentAccess parentDb;
+        private ChildAccess childDb;
+        private PaymentAccess paymentDb;
+        private const decimal PaymentPerChild = 300.00M;
+
+        public ChildRegistration(ParentAccess _parentDb, ChildAccess _childDb, PaymentAccess _paymentDb)
         {
             parentDb = _parentDb;
             childDb = _childDb;
-            
+            paymentDb = _paymentDb;
+        }
+
+        public IActionResult PaymentDetails(int Id)
+        {
+            List<PaymentModel> PaymentsList = paymentDb.GetRows(Id);
+            List<Models.PaymentModel> _PaymentsList = new List<Models.PaymentModel>();
+            foreach (var payment in PaymentsList) {
+                Models.PaymentModel _payment = new Models.PaymentModel {
+                    Id = payment.Id,
+                    ParentId = payment.ParentId,
+                    Amount = payment.Amount,
+                    Ref = payment.Ref
+                };
+                _PaymentsList.Add(_payment);
+            }
+            return View(_PaymentsList);
         }
 
         [HttpGet]
-        public IActionResult ChildDetails(int ParentId)
+
+        public IActionResult ChildDetails(int Id)
         {
-            List<ChildModel> children = childDb.GetRows(ParentId);
+            List<ChildModel> children = childDb.GetRows(Id);
             List<Models.ChildModel> _children = new List<Models.ChildModel>();
             foreach (var child in children) {
                 Models.ChildModel _child = new Models.ChildModel {
@@ -39,29 +61,67 @@ namespace CrecheApp.Controllers
             }
             return View(_children);
         }
+
         [HttpPost]
         public IActionResult ChildDetails(Models.ChildModel childModel)
         {
             List<ChildModel> children = childDb.GetRows(childModel.ParentId);
             List<Models.ChildModel> _children = new List<Models.ChildModel>();
-            foreach( var child in children) {
-                Models.ChildModel _child = new Models.ChildModel {Id = child.Id,
-                                                                  ParentId = child.ParentId,
-                                                                  Name = child.Name,
-                                                                  Surname = child.Surname,
-                                                                  IDNumber = child.IDNumber
-                                                                 };
+            foreach (var child in children) {
+                Models.ChildModel _child = new Models.ChildModel { Id = child.Id,
+                    ParentId = child.ParentId,
+                    Name = child.Name,
+                    Surname = child.Surname,
+                    IDNumber = child.IDNumber
+                };
                 _children.Add(_child);
             }
             return View(_children);
         }
 
+        [HttpGet]
+        public IActionResult EditChild(int Id)
+        {
+            ChildModel childModel = childDb.GetRow(Id);
+            Models.ChildModel _childModel;
+            if(childModel != null) {
+                _childModel = new Models.ChildModel {
+                    Id = childModel.Id,
+                    ParentId = childModel.ParentId,
+                    Name = childModel.Name,
+                    Surname = childModel.Surname,
+                    IDNumber = childModel.IDNumber
+                };
+                return View(_childModel);
+            }
+            return RedirectToAction("Error");
+        }
+
         [HttpPost]
-        public IActionResult ParentDetails(ParentModel parentModel)
+        public IActionResult EditChild(Models.ChildModel childModel)
+        {
+            if(ModelState.IsValid) {
+                ChildModel _childModel = new ChildModel {
+                    Id = childModel.Id,
+                    ParentId = childModel.ParentId,
+                    Name = childModel.Name,
+                    Surname = childModel.Surname,
+                    IDNumber = childModel.IDNumber
+
+                };
+                childDb.SetRow(_childModel);
+                return RedirectToAction("ChildDetails",new {ParentId = _childModel.ParentId });
+            }
+            return View("Error");
+        }
+
+
+        [HttpPost]
+        public IActionResult ParentDetails(Models.ParentModel parentModel)
         {
             if (ModelState.IsValid) {
-                
-                DataLibrary.Models.ParentModel _parentModel = new DataLibrary.Models.ParentModel {
+
+                ParentModel _parentModel = new ParentModel {
                     Id = parentModel.Id,
                     Name = parentModel.Name,
                     Surname = parentModel.Surname,
@@ -77,13 +137,13 @@ namespace CrecheApp.Controllers
 
         }
 
-        
+
         [HttpGet]
         public IActionResult ParentDetails(int Id)
         {
-            DataLibrary.Models.ParentModel model = parentDb.GetRow(Id);
+            ParentModel model = parentDb.GetRow(Id);
             if (model != null) {
-                ParentModel RegisteredParent = new ParentModel {
+                Models.ParentModel RegisteredParent = new Models.ParentModel {
                     Id = model.Id,
                     Name = model.Name,
                     Surname = model.Surname,
@@ -97,15 +157,15 @@ namespace CrecheApp.Controllers
             else {
                 return RedirectToAction("Error");
             }
-            
-            
+
+
         }
         [HttpGet]
         public IActionResult EditParent(int Id)
         {
-            DataLibrary.Models.ParentModel model = parentDb.GetRow(Id);
+            ParentModel model = parentDb.GetRow(Id);
             if (model != null) {
-                ParentModel RegisteredParent = new ParentModel {
+                Models.ParentModel RegisteredParent = new Models.ParentModel {
                     Id = model.Id,
                     Name = model.Name,
                     Surname = model.Surname,
@@ -121,11 +181,11 @@ namespace CrecheApp.Controllers
             }
         }
         [HttpPost]
-        public IActionResult EditParent(ParentModel parentModel)
+        public IActionResult EditParent(Models.ParentModel parentModel)
         {
-            if(ModelState.IsValid) {
+            if (ModelState.IsValid) {
 
-                DataLibrary.Models.ParentModel model = new DataLibrary.Models.ParentModel {
+                ParentModel model = new ParentModel {
                     Id = parentModel.Id,
                     Name = parentModel.Name,
                     Surname = parentModel.Surname,
@@ -142,41 +202,56 @@ namespace CrecheApp.Controllers
         }
 
         [HttpGet]
-       public IActionResult CreateChild(int ParentId)
-       {
-            Models.ChildModel childModel = new Models.ChildModel() {    Id = 0,
-                                                                        ParentId = ParentId};
-            return View(childModel);  
-       }
-     
+        public IActionResult CreateChild(int Id)
+        {
+            ChildModel childModel = new ChildModel() { Id = 1,
+                ParentId = Id };
+            return View(childModel);
+        }
+
         [HttpPost]
-       public IActionResult CreateChild(Models.ChildModel childModel)
-       {
+        public IActionResult CreateChild(Models.ChildModel childModel)
+        {
             if (ModelState.IsValid) {
-                    DataLibrary.Models.ChildModel child = new ChildModel { Id = childModel.Id,
+                ChildModel child = new ChildModel {
+                    Id = childModel.Id,
                     ParentId = childModel.ParentId,
                     Name = childModel.Name,
                     Surname = childModel.Surname,
                     IDNumber = childModel.IDNumber };
 
                 childDb.SetRow(child);
-                return RedirectToAction("ChildDetails",childModel);
+                PaymentModel paymentModel = new PaymentModel {
+                    ParentId = childModel.ParentId,
+                    Amount = PaymentPerChild
+                };
+                paymentDb.SetRow(paymentModel);
+                return RedirectToAction("ChildDetails", childModel);
             }
 
+
             return RedirectToAction("Error");
-       }
+        }
+
+        [HttpGet]
+        [Route("/{Id?}/{ParentId?}")]
+        public IActionResult DeleteChild(int Id,int ParentId)
+        {
+            childDb.DeleteRow(Id);
+            return RedirectToAction("ChildDetails",new { Id = ParentId });
+        }
 
         [HttpGet]
         public IActionResult Registration()
         {
             //do a search for registered parent
             //if found redirect to parent details
-            DataLibrary.Models.ParentModel model = parentDb.GetRow(User.Identity.Name);
+            ParentModel model = parentDb.GetRow(User.Identity.Name);
             
             if (model != null) {
                 //Found a registered parent
                
-                return RedirectToAction("ParentDetails",model.Id);
+                return RedirectToAction("ParentDetails",new { Id = model.Id});
             }
             ParentModel parent = new ParentModel { Id = 1, 
                                                    UserId = User.Identity.Name};
