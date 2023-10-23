@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h4>Admin Page</h4>
+<hr>
+<div class="row">
+<div class="col-md-2 col-md-1">
+    <table class="table">
+        <tr>
+            <td>
+            <a asp-controller="AdminController" asp-action="ModerateForum">Moderate Comments</a>
+                </td>
+        </tr>
+        <tr>
+            <td>
+            <a asp-controller="AdminController" asp-action="AdminIndex">Bar forum user</a>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                <a asp-controller="AdminController" asp-action="AdminIndex">Add another admin user</a>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                    <a asp-controller="AdminController" asp-action="AdminIndex">Approve child registration</a>
+                </td>
+        </tr>
+        <tr>
+                <td>
+                    <a asp-controller="AdminController" asp-action="AdminIndex">Remove old applicants</a>
+                </td>
+        </tr>
+    </table>
+</div>
+</div>

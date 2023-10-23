@@ -8,7 +8,7 @@
 <h4>Edit Comment</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-2">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CommentId"/>
@@ -23,5 +23,8 @@
                 <input type="submit" value="Edit" class="btn btn-primary" />
             </div>
         </form>
+    </div>
+    <div>
+        <a asp-action="Forum">Back to List</a>
     </div>
 </div>

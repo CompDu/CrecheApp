@@ -3,7 +3,7 @@
 <h4>Add a child</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-2">
         <form asp-action="CreateChild">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -34,7 +34,7 @@
 </div>
 
 <div>
-    <a asp-controller="ChildRegistration" asp-action="ParentDetails" asp-route-id=@Model.Id>Back to List</a>
+    <a asp-controller="ChildRegistration" asp-action="ParentDetails" asp-route-id=@Model.ParentId>Back to List</a>
 </div>
 
 @section Scripts {

@@ -26,4 +26,8 @@
     <ProjectReference Include="..\DataLibrary\DataLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\BannerLinesLadyByRiverS.png" />
+  </ItemGroup>
+
 </Project>

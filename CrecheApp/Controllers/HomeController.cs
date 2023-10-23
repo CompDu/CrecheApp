@@ -25,6 +25,7 @@ namespace CrecheApp.Controllers
         {
             return View();
         }
+        [Authorize]
         [HttpGet] 
         public IActionResult Edit(int id)
         {
@@ -49,6 +50,7 @@ namespace CrecheApp.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Edit(ForumModel forumModel)
         {
@@ -65,10 +67,7 @@ namespace CrecheApp.Controllers
         
         }
 
-        public IActionResult Reply()
-        {
-            return View();
-        }
+        [Authorize]
         [HttpPost]
         public IActionResult CreateComment(Models.ForumModel forumModel)
         {
@@ -86,6 +85,7 @@ namespace CrecheApp.Controllers
 
            return RedirectToAction("Forum");
         }
+        [Authorize]
         public IActionResult CreateComment()
         {
 
@@ -96,9 +96,7 @@ namespace CrecheApp.Controllers
         [Authorize]
         public IActionResult Forum()
         {
-          ViewData["Message"] = "Forum Page";
-
-          
+           // ViewData["Message"] = "Forum Page";
           var data = forumData.GetRows();
           List<Models.ForumModel> CommentsList = new List<Models.ForumModel>();
 
@@ -114,9 +112,16 @@ namespace CrecheApp.Controllers
                 }
 
                   return View(CommentsList);
-                    
+                   
+        }
 
-
+        [Authorize]
+        [HttpGet]
+        [Route("/{Id}")]
+        public IActionResult DeleteComment(int id)
+        {
+            forumData.DeleteRow(id);
+            return RedirectToAction("Forum");
         }
 
         public IActionResult Privacy()

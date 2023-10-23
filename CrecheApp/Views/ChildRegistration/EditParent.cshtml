@@ -3,7 +3,7 @@
 <h4>ParentModel</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-2">
         <form asp-action="EditParent">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -42,7 +42,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="ParentDetails" asp-route-id="@Model.Id">Back to List</a>
 </div>
 
 @section Scripts {

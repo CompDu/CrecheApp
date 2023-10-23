@@ -58,20 +58,12 @@ namespace DataLibrary.BusinessLogic
             return sqlDataAccess.SaveData<dynamic>("dbo.spForum_InsertComment", Parameters);
         }
 
-        public List<ForumModel> GetData<ForumModel>(string Procedure,dynamic par)
-        {
-            var parameters = par;
-            return sqlDataAccess.LoadData<ForumModel, DynamicParameters>(Procedure, parameters);
-
-        }
-
-        public int SetData(string procedure,dynamic par)
-        {
-            // not implemented yet
-            
-            return sqlDataAccess.SaveData<dynamic>(procedure, par);
-
-        }
+       public void DeleteRow(int CommentId)
+       {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@CommentId",CommentId);
+            sqlDataAccess.SaveData("spForum_DeleteComment",parameters);
+       }
 
 
 

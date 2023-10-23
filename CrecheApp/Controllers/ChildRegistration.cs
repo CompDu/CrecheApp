@@ -204,7 +204,7 @@ namespace CrecheApp.Controllers
         [HttpGet]
         public IActionResult CreateChild(int Id)
         {
-            ChildModel childModel = new ChildModel() { Id = 1,
+            Models.ChildModel childModel = new Models.ChildModel() { Id = 1,
                 ParentId = Id };
             return View(childModel);
         }

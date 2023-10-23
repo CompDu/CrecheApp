@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CrecheApp.Models.ForumModel>
+
+@{
+    ViewData["Title"] = "Forum";
+}
+
+<h1>Forum Moderation</h1>
+
+
+<table class="table table-bordered table-striped">
+    <thead class="alert-info">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    <a asp-action="DeleteComment" asp-route-id="@item.CommentId">Delete</a>
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
